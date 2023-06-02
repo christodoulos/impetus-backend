@@ -1,4 +1,8 @@
 <p align="center">
+  <a href="https://cordis.europa.eu/project/id/101037084" target="blank"><img src="impetus-logo.svg" width="500" alt="Impetus Logo" /></a>
+</p>
+
+<p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
