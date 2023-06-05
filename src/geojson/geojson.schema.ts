@@ -1,10 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { GeoJsonType } from './geojson.dto';
+import { HydratedDocument } from 'mongoose';
+import { GeometryType } from './geojson.dto';
 
-@Schema({ _id: false })
+@Schema()
 class Geometry {
-  @Prop({ type: String, required: true, enum: Object.values(GeoJsonType) })
-  type: GeoJsonType;
+  @Prop({ type: String, required: true, enum: Object.values(GeometryType) })
+  type: GeometryType;
 
   @Prop({ type: [], required: true })
   coordinates: any[];
@@ -12,10 +13,10 @@ class Geometry {
 
 const GeometrySchema = SchemaFactory.createForClass(Geometry);
 
-@Schema({ _id: false })
+@Schema()
 class Feature {
-  @Prop({ type: String, required: true, enum: [GeoJsonType.Feature] })
-  type: GeoJsonType.Feature;
+  @Prop({ type: String, required: true, default: 'Feature' })
+  type: 'Feature';
 
   @Prop({ type: GeometrySchema, required: true })
   geometry: Geometry;
@@ -26,10 +27,14 @@ class Feature {
 
 const FeatureSchema = SchemaFactory.createForClass(Feature);
 
-@Schema({ _id: false })
+@Schema()
 export class FeatureCollection {
-  @Prop({ type: String, required: true, enum: [GeoJsonType.FeatureCollection] })
-  type: GeoJsonType.FeatureCollection;
+  @Prop({
+    type: String,
+    required: true,
+    default: 'FeatureCollection',
+  })
+  type: 'FeatureCollection';
 
   @Prop({ type: [FeatureSchema], required: true })
   features: Feature[];
@@ -38,5 +43,6 @@ export class FeatureCollection {
   properties: Record<string, any>;
 }
 
+export type FeatureCollectionDocument = HydratedDocument<FeatureCollection>;
 export const FeatureCollectionSchema =
   SchemaFactory.createForClass(FeatureCollection);
