@@ -1,6 +1,10 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import {
+  SwaggerModule,
+  DocumentBuilder,
+  SwaggerCustomOptions,
+} from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
 
@@ -10,6 +14,10 @@ async function bootstrap() {
   // globalPrefix
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
+  app.enableCors({
+    origin: ['http://localhost:4200', 'https://beta.atticadt.uwmh.eu'],
+    preflightContinue: true,
+  });
 
   // swaggerConfig
   const config = new DocumentBuilder()
@@ -19,8 +27,11 @@ async function bootstrap() {
     // .addTag('Digital Twins')
     // .addBearerAuth()
     .build();
+  const customOptions: SwaggerCustomOptions = {
+    customCssUrl: 'theme-flattop.css',
+  };
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document, customOptions);
 
   const port = process.env.PORT || 3456;
   await app.listen(port);
