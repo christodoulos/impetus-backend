@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { GeojsonModule } from './geojson/geojson.module';
 import { ApnNurseryModule } from './apn-nursery/apn-nursery.module';
+import { FarmairModule } from './farmair/farmair.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ApnNurseryModule } from './apn-nursery/apn-nursery.module';
     AuthModule,
     GeojsonModule,
     ApnNurseryModule,
+    FarmairModule,
   ],
 })
 export class AppModule {}
