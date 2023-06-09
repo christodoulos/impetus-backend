@@ -22,13 +22,23 @@ async function bootstrap() {
   // swaggerConfig
   const config = new DocumentBuilder()
     .setTitle('Digital Twins of Athens API')
-    .setDescription('API description')
+    .setDescription(
+      'Provides data to <a href="https://atticadt.uwmh.eu">DT frontend</a> and any interested consumer',
+    )
     .setVersion('1.0')
     // .addTag('Digital Twins')
-    // .addBearerAuth()
+    .addBearerAuth()
     .build();
   const customOptions: SwaggerCustomOptions = {
+    swaggerOptions: {
+      docExpansion: 'none',
+      defaultModelsExpandDepth: 999,
+      defaultModelExpandDepth: 999,
+      syntaxHighlighttheme: 'nord',
+    },
     customCssUrl: 'theme-flattop.css',
+    customfavIcon: 'favicon.ico',
+    customSiteTitle: 'Digital Twins of Athens API',
   };
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document, customOptions);
