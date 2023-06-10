@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { FarmairService } from './farmair.service';
 import { FarmAIrDTO } from './farmair.dto';
+import { Public } from 'src/app.metadata';
 
 @ApiTags('farmAIr')
 @Controller('farmair')
@@ -13,6 +14,7 @@ export class FarmairController {
     return await this.service.addScan(data);
   }
 
+  @Public()
   @Get('/vineyard/:name')
   async farmairGetScan(@Param('name') name: string) {
     const vineyard = await this.service.getScan(name);

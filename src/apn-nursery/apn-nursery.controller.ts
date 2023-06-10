@@ -1,7 +1,13 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { ApnNurseryService } from './apn-nursery.service';
 import { ApnPLCDTO } from './apn-nursery.dto';
+import { Public } from 'src/app.metadata';
 
 @ApiTags('Athens Plant Nursery')
 @Controller('apn-nursery')
@@ -9,6 +15,7 @@ export class ApnNurseryController {
   constructor(private readonly service: ApnNurseryService) {}
 
   @Get('metrics/:limit')
+  @ApiBearerAuth('access-token')
   @ApiOperation({ summary: 'Get the last {limit} (0=all) PLC metrics' })
   @ApiResponse({ status: 200, description: 'Success' })
   async apnNurseryGetMetrics(@Param('limit') limit: number) {
@@ -16,6 +23,7 @@ export class ApnNurseryController {
     return metrics;
   }
 
+  @Public()
   @Get('metrics/temperature-membrane-tank-5/:limit')
   async apnNurserygetTemperatureMembraneTank5(@Param('limit') limit: number) {
     const metrics = await this.service.getTemperatureMembraneTank5(limit);

@@ -23,11 +23,21 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Digital Twins of Athens API')
     .setDescription(
-      'Provides data to <a href="https://atticadt.uwmh.eu">DT frontend</a> and any interested consumer',
+      'The <a href="/api">API</a> provides data to <a href="https://atticadt.uwmh.eu">DT frontend</a> and any interested consumer',
     )
     .setVersion('1.0')
     // .addTag('Digital Twins')
-    .addBearerAuth()
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Enter JWT token',
+        in: 'header',
+      },
+      'access-token',
+    )
     .build();
   const customOptions: SwaggerCustomOptions = {
     swaggerOptions: {

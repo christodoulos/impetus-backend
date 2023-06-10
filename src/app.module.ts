@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
@@ -8,6 +9,8 @@ import { AuthModule } from './auth/auth.module';
 import { GeojsonModule } from './geojson/geojson.module';
 import { ApnNurseryModule } from './apn-nursery/apn-nursery.module';
 import { FarmairModule } from './farmair/farmair.module';
+
+import { AuthGuard } from './auth/auth.guard';
 
 @Module({
   imports: [
@@ -21,5 +24,6 @@ import { FarmairModule } from './farmair/farmair.module';
     ApnNurseryModule,
     FarmairModule,
   ],
+  providers: [{ provide: APP_GUARD, useClass: AuthGuard }],
 })
 export class AppModule {}

@@ -8,12 +8,14 @@ import {
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { AuthDTO } from './auth.dto';
+import { Public } from 'src/app.metadata';
 
-@ApiTags('Authentιcation Management')
+@ApiTags('Authentication Management')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @Post('login')
   @UsePipes(new ValidationPipe({ whitelist: true }))
   @ApiOperation({ summary: 'Login a User' })
