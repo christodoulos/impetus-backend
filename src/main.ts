@@ -5,7 +5,7 @@ import {
   DocumentBuilder,
   SwaggerCustomOptions,
 } from '@nestjs/swagger';
-
+import * as bodyParser from 'body-parser';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -14,6 +14,10 @@ async function bootstrap() {
   // globalPrefix
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
+
+  app.use(bodyParser.json({ limit: '50mb' }));
+  app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
   app.enableCors({
     origin: ['http://localhost:4200', 'https://beta.atticadt.uwmh.eu'],
     preflightContinue: true,

@@ -4,7 +4,7 @@
 
 ## Description
 
-This is the [Digital Twins of Athens](https://atticadt.uwmh.eu/v2) backend application.
+This project started as the [Digital Twins of Athens](https://atticadt.uwmh.eu/v2) backend application. The authors will try to evolve it to the central backend facility of several _UWMH_ frontend applications and utilities.
 
 ## Installation
 

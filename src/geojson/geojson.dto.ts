@@ -25,6 +25,7 @@ export enum GeometryType {
 export class IsCoordinates implements ValidatorConstraintInterface {
   validate(coordinates: any[], args: ValidationArguments): boolean {
     const type: GeometryType = (args.object as Geometry).type;
+    console.log(type);
 
     switch (type) {
       case GeometryType.Point:
@@ -32,8 +33,9 @@ export class IsCoordinates implements ValidatorConstraintInterface {
       case GeometryType.LineString:
         return this.validateLineString(coordinates);
       case GeometryType.Polygon:
-      case GeometryType.MultiPolygon:
         return this.validatePolygon(coordinates);
+      case GeometryType.MultiPolygon:
+        return this.validateMultipolygon(coordinates);
       default:
         return false;
     }
@@ -51,6 +53,10 @@ export class IsCoordinates implements ValidatorConstraintInterface {
     return (
       coordinates.length >= 1 && coordinates.every(this.validateLineString)
     );
+  };
+
+  private validateMultipolygon = (coordinates: any[]): boolean => {
+    return coordinates.length >= 2 && coordinates.every(this.validatePolygon);
   };
 
   defaultMessage(args: ValidationArguments): string {
@@ -73,7 +79,7 @@ export class Geometry {
   coordinates: any[];
 }
 
-export class Feature {
+export class FeatureDTO {
   @Equals('Feature', { message: 'Invalid feature type' })
   type: 'Feature';
 
@@ -99,7 +105,7 @@ export class FeatureCollectionDTO {
   type: 'FeatureCollection';
 
   @ValidateNested({ each: true })
-  @Type(() => Feature)
+  @Type(() => FeatureDTO)
   @ApiProperty({
     example: [
       {
@@ -140,7 +146,7 @@ export class FeatureCollectionDTO {
     ],
     description: 'An array of Features',
   })
-  features: Feature[];
+  features: FeatureDTO[];
 
   @IsString()
   @IsOptional()

@@ -14,6 +14,7 @@ import { Public } from 'src/app.metadata';
 export class ApnNurseryController {
   constructor(private readonly service: ApnNurseryService) {}
 
+  @Public()
   @Get('metrics/:limit')
   @ApiBearerAuth('access-token')
   @ApiOperation({ summary: 'Get the last {limit} (0=all) PLC metrics' })

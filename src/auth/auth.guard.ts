@@ -23,20 +23,16 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    console.log('SKATA');
-
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
     if (!token) {
       throw new UnauthorizedException();
     }
     try {
-      console.log(token);
       const payload = await this.jwtService.verifyAsync(token, {
         secret: 'this a secret',
       });
       request['user'] = payload;
-      console.log(payload);
     } catch {
       throw new UnauthorizedException();
     }

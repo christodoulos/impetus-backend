@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { GeometryType } from './geojson.dto';
 
-@Schema()
+@Schema({ _id: false })
 class Geometry {
   @Prop({ type: String, required: true, enum: Object.values(GeometryType) })
   type: GeometryType;
@@ -14,7 +14,7 @@ class Geometry {
 const GeometrySchema = SchemaFactory.createForClass(Geometry);
 
 @Schema()
-class Feature {
+export class Feature {
   @Prop({ type: String, required: true, default: 'Feature' })
   type: 'Feature';
 
@@ -25,7 +25,8 @@ class Feature {
   properties: Record<string, any>;
 }
 
-const FeatureSchema = SchemaFactory.createForClass(Feature);
+export type FeatureDocument = HydratedDocument<Feature>;
+export const FeatureSchema = SchemaFactory.createForClass(Feature);
 
 @Schema()
 export class FeatureCollection {
@@ -38,6 +39,9 @@ export class FeatureCollection {
 
   @Prop({ type: [FeatureSchema], required: true })
   features: Feature[];
+
+  @Prop({ type: String, unique: true })
+  id: string;
 
   @Prop({ type: Object, default: {} })
   properties: Record<string, any>;
