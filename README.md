@@ -8,6 +8,8 @@ This project started as the [Digital Twins of Athens](https://atticadt.uwmh.eu/v
 
 ## Installation
 
+After cloning the repository, setup your MongoDB instance accordingly and install the dependencies.
+
 ```bash
 $ npm install
 ```
