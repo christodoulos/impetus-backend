@@ -19,7 +19,7 @@ async function bootstrap() {
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
   app.enableCors({
-    origin: ['http://localhost:4200', 'https://beta.atticadt.uwmh.eu'],
+    origin: ['http://localhost:4200', 'https://atticadt.uwmh.eu'],
     preflightContinue: true,
   });
 

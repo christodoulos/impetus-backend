@@ -4,11 +4,11 @@
 
 ## Description
 
-This project started as the [Digital Twins of Athens](https://atticadt.uwmh.eu/v2) backend application. The authors will try to evolve it to the central backend facility of several _UWMH_ frontend applications and utilities.
+This project started as the [Digital Twins of Athens](https://atticadt.uwmh.eu/v2) back-end application. The authors will try to evolve it to the central back-end facility of several _UWMH_ front-end applications and utilities.
 
 ## Installation
 
-After cloning the repository, setup your MongoDB instance accordingly and install the dependencies.
+After cloning the repository, set up your MongoDB instance accordingly and install the dependencies.
 
 ```bash
 $ npm install
