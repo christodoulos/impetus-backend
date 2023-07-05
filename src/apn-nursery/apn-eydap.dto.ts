@@ -1,7 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import { IsDate, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class ApnEydapDTO {
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   @IsDate()
   @ApiProperty()
   ts: Date;

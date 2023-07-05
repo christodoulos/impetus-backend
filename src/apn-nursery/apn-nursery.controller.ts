@@ -108,8 +108,8 @@ export class ApnNurseryController {
     return metrics;
   }
 
+  @Public()
   @Post('eydap')
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   @ApiBearerAuth('access-token')
   @ApiConsumes('application/json')
   @ApiBody({ type: ApnEydapDTO })

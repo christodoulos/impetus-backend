@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   SwaggerModule,
@@ -22,6 +22,9 @@ async function bootstrap() {
     origin: ['http://localhost:4200', 'https://atticadt.uwmh.eu'],
     preflightContinue: true,
   });
+
+  // Apply the ValidationPipe globally
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
   // swaggerConfig
   const config = new DocumentBuilder()
