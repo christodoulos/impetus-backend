@@ -1,14 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ApnPLC, ApnPLCDocument } from './apn-nursery.schema';
+import {
+  ApnPLC,
+  ApnPLCDocument,
+  ApnEydap,
+  ApnEydapDocument,
+} from './apn-nursery.schema';
 import { ApnPLCDTO } from './apn-nursery.dto';
+import { ApnEydapDTO } from './apn-eydap.dto';
 
 @Injectable()
 export class ApnNurseryService {
   constructor(
     @InjectModel(ApnPLC.name) private apnPLCModel: Model<ApnPLCDocument>,
+    @InjectModel(ApnEydap.name) private apnEydapModel: Model<ApnEydapDocument>,
   ) {}
+
+  //////////////////////////////////////////////
+  // Athens Plant Nursery PLC "GET" endpoints //
+  //////////////////////////////////////////////
 
   async getPLCMetrics(limit: number): Promise<ApnPLC[]> {
     const metrics = await this.apnPLCModel
@@ -125,5 +136,14 @@ export class ApnNurseryService {
       .limit(limit)
       .exec();
     return metrics;
+  }
+
+  //////////////////////////////////////////
+  // Athens Plant Nursery Eydap endpoints //
+  //////////////////////////////////////////
+
+  async createEydap(createApnEydapDto: ApnEydapDTO): Promise<ApnEydap> {
+    const createdApnEydap = new this.apnEydapModel(createApnEydapDto);
+    return createdApnEydap.save();
   }
 }

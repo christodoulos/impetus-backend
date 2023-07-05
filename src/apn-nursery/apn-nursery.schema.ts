@@ -45,3 +45,33 @@ export class ApnPLC {
 
 export type ApnPLCDocument = HydratedDocument<ApnPLC>;
 export const ApnPLCSchema = SchemaFactory.createForClass(ApnPLC);
+
+@Schema({ collection: 'apn-eydap' })
+export class ApnEydap {
+  @Prop({ type: Date, default: new Date() })
+  ts?: Date;
+
+  @Prop({ type: Number })
+  ec?: number;
+
+  @Prop({ type: Number })
+  tc?: number;
+
+  @Prop({ type: Number })
+  bod5?: number;
+
+  @Prop({ type: Number })
+  tss?: number;
+
+  @Prop({ type: Number })
+  turbidity?: number;
+
+  @Prop({ type: Number })
+  tn?: number;
+
+  @Prop({ type: Number })
+  nh4?: number;
+}
+
+export type ApnEydapDocument = HydratedDocument<ApnEydap>;
+export const ApnEydapSchema = SchemaFactory.createForClass(ApnEydap);
