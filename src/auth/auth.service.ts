@@ -17,14 +17,18 @@ export class AuthService {
     const user = await this.userService.findOne(username);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException('Invalid username or password!');
+    }
+
+    if (!user.emailVerified) {
+      throw new UnauthorizedException('Verify your email first!');
     }
 
     // Check the password
     const passwordValid = await bcrypt.compare(password, user.password);
 
     if (!passwordValid) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException('Invalid username or password!');
     }
 
     // Generate JWT

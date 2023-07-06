@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { CaslModule } from './casl/casl.module';
 import { join } from 'path';
 
 import { UserModule } from './user/user.module';
@@ -23,6 +24,7 @@ import { AuthGuard } from './auth/auth.guard';
     GeojsonModule,
     ApnNurseryModule,
     FarmairModule,
+    CaslModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: AuthGuard }],
 })
