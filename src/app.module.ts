@@ -3,6 +3,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { CaslModule } from './casl/casl.module';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerBehindProxyGuard } from './throttler-behind-proxy.guard';
 import { join } from 'path';
 
 import { UserModule } from './user/user.module';
@@ -15,6 +17,10 @@ import { AuthGuard } from './auth/auth.guard';
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client'),
     }),
@@ -26,6 +32,12 @@ import { AuthGuard } from './auth/auth.guard';
     FarmairModule,
     CaslModule,
   ],
-  providers: [{ provide: APP_GUARD, useClass: AuthGuard }],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerBehindProxyGuard,
+    },
+    { provide: APP_GUARD, useClass: AuthGuard },
+  ],
 })
 export class AppModule {}
