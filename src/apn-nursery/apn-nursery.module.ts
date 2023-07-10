@@ -8,6 +8,7 @@ import {
 } from './apn-nursery.schema';
 import { ApnNurseryService } from './apn-nursery.service';
 import { ApnNurseryController } from './apn-nursery.controller';
+import { CaslModule } from 'src/casl/casl.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ApnNurseryController } from './apn-nursery.controller';
     MongooseModule.forFeature([
       { name: ApnEydap.name, schema: ApnEydapSchema },
     ]),
+    CaslModule,
   ],
   providers: [ApnNurseryService],
   controllers: [ApnNurseryController],

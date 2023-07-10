@@ -15,14 +15,15 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { User } from './user.schema';
 import { CreateUserDTO } from './user.dto';
+import { Public } from 'src/app.metadata';
 
 @ApiTags('User Management')
 @Controller('user')
 export class UserController {
   constructor(private readonly usersService: UserService) {}
 
+  @Public()
   @Post()
-  @UsePipes(new ValidationPipe({ whitelist: true }))
   @ApiOperation({ summary: 'Registers a new User' })
   @ApiBody({ type: CreateUserDTO })
   @ApiResponse({

@@ -73,7 +73,6 @@ export class GeojsonController {
   @ApiOperation({ summary: 'Gets a NUTS with a specific id' })
   async getNUTS(@Param('id') id: string) {
     const feature = await this.geojsonService.findNutsById(id);
-    console.log(feature);
     return feature;
   }
 

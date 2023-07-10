@@ -1,49 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import {
-  createMongoAbility,
-  AbilityBuilder,
-  AbilityClass,
-  ExtractSubjectType,
-  InferSubjects,
-} from '@casl/ability';
+import { AbilityBuilder, createMongoAbility } from '@casl/ability';
+import { User } from 'src/user/user.schema';
 
-export default createMongoAbility([
-  { action: 'read', subject: 'Post' },
-  {
-    inverted: true,
-    action: 'delete',
-    subject: 'Post',
-    conditions: { published: true },
-  },
-]);
+@Injectable()
+export class CaslAbilityFactory {
+  createForUser(user: User) {
+    const { can, build } = new AbilityBuilder(createMongoAbility);
 
-// type Subjects = InferSubjects<typeof Article | typeof User> | 'all';
+    if (user.isAdmin) {
+      can('manage', 'all');
+    } else {
+      can('read', 'all');
+    }
 
-// export type AppAbility = createMongoAbility<[Action, Subjects]>;
+    if (user.claims.includes('EYDAP')) {
+      can('update', 'EydapApn');
+    }
 
-// @Injectable()
-// export class CaslAbilityFactory {
-//   createForUser(user: User) {
-//     const rules = [];
-
-//     if (user.isAdmin) {
-//       rules.push({ action: 'manage', subject: 'all' }); // read-write access to everything
-//     } else {
-//       rules.push({ action: 'read', subject: 'all' }); // read-only access to everything
-//     }
-
-//     rules.push({
-//       action: 'update',
-//       subject: 'Article',
-//       conditions: { authorId: user.id },
-//     });
-//     rules.push({
-//       inverted: true,
-//       action: 'delete',
-//       subject: 'Article',
-//       conditions: { isPublished: true },
-//     });
-
-//     return createMongoAbility(rules);
-//   }
-// }
+    return build();
+  }
+}

@@ -3,17 +3,23 @@ import { HydratedDocument } from 'mongoose';
 
 @Schema()
 export class User {
-  @Prop({ required: true, unique: true })
+  @Prop({ type: String, required: true, unique: true })
   username: string;
 
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   password: string;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ type: String, required: true, unique: true })
   email: string;
 
-  @Prop({ default: false })
+  @Prop({ type: Boolean, default: false })
   emailVerified: boolean;
+
+  @Prop({ type: Boolean, default: false })
+  isAdmin: boolean;
+
+  @Prop({ type: [String], default: [] })
+  claims: string[];
 }
 
 export type UserDocument = HydratedDocument<User>;

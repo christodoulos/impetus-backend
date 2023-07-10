@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
@@ -19,6 +11,7 @@ import { ApnNurseryService } from './apn-nursery.service';
 import { ApnPLCDTO } from './apn-nursery.dto';
 import { Public } from 'src/app.metadata';
 import { ApnEydapDTO } from './apn-eydap.dto';
+import { CheckPolicies, PoliciesGuard } from 'src/casl/policies-guard';
 
 @ApiTags('Athens Plant Nursery')
 @Controller('apn-nursery')
@@ -108,13 +101,12 @@ export class ApnNurseryController {
     return metrics;
   }
 
-  @Public()
-  @Post('eydap')
   @ApiBearerAuth('access-token')
-  @ApiConsumes('application/json')
+  @UseGuards(PoliciesGuard)
+  @CheckPolicies((ability) => ability.can('update', 'EydapApn'))
+  @Post('eydap')
   @ApiBody({ type: ApnEydapDTO })
   async create(@Body() createApnEydapDto: ApnEydapDTO) {
-    console.log(createApnEydapDto);
     return this.service.createEydap(createApnEydapDto);
   }
 }
