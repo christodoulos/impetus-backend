@@ -76,6 +76,16 @@ export class GeojsonController {
     return feature;
   }
 
+  // @Public()
+  // @Get('nuts/level/:level')
+  // @ApiOperation({ summary: 'Gets all NUTS of a specific level' })
+  // async getNUTSByLevel(@Param('level') level: number): Promise<FeatureCollection> {
+  //   const features = await this.geojsonService.findNutsByLevel(level);
+  //   console.log('AAAAAAAAAAAAAAAA', features);
+  //   return {type: 'FeatureCollection', features}};
+  // }
+
+  @Public()
   @Post('featurecollection')
   @UsePipes(new ValidationPipe({ whitelist: true }))
   @ApiBearerAuth('access-token')
@@ -101,6 +111,7 @@ export class GeojsonController {
   async getFeatureCollection(@Param('id') id: string) {
     const featureCollection =
       await this.geojsonService.findFeatureCollectionById(id);
+
     return featureCollection;
   }
 }

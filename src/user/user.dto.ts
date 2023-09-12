@@ -23,3 +23,13 @@ export class CreateUserDTO {
   })
   readonly email: string;
 }
+
+export class UserDTO {
+  id: string;
+  name: string;
+  email: string;
+  photoUrl: string;
+  firstName: string;
+  lastName: string;
+  provider: string;
+}

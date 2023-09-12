@@ -23,10 +23,13 @@ async function bootstrap() {
   app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-  app.enableCors({
-    origin: ['http://localhost:4200', 'https://atticadt.uwmh.eu'],
-    preflightContinue: true,
-  });
+  // app.enableCors({
+  //   origin: ['http://localhost:4200', 'https://atticadt.uwmh.eu'],
+  //   preflightContinue: true,
+  //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Include the required methods
+  //   allowedHeaders: ['Content-Type', 'Authorization'], // Add any additional headers needed for your requests
+  // });
+  app.enableCors();
 
   // Apply the ValidationPipe globally
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
@@ -57,6 +60,7 @@ async function bootstrap() {
       defaultModelsExpandDepth: 999,
       defaultModelExpandDepth: 999,
       syntaxHighlighttheme: 'nord',
+      syntaxHighlight: false,
     },
     customCssUrl: 'theme-flattop.css',
     customfavIcon: 'favicon.ico',

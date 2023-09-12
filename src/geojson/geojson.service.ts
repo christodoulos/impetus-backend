@@ -37,11 +37,24 @@ export class GeojsonService {
       .exec();
   }
 
+  // async findNutsByLevel(level: number): Promise<Feature[]> {
+  //   return this.featureModel
+  //     .find({ ['properties.LEVL_CODE']: level })
+  //     .select({ _id: 0, __v: 0 })
+  //     .exec();
+  // }
+
   async createFeatureCollection(
     geojson: FeatureCollectionDTO,
   ): Promise<FeatureCollection> {
-    const newFeatureCollection = new this.featureCollectionModel(geojson);
-    return newFeatureCollection.save();
+    // const newFeatureCollection = new this.featureCollectionModel(geojson);
+    // return newFeatureCollection.save();
+    return this.featureCollectionModel
+      .findOneAndUpdate({ id: geojson.id }, geojson, {
+        upsert: true,
+        new: true,
+      })
+      .exec();
   }
 
   async findFeatureCollectionById(id: string): Promise<FeatureCollection> {

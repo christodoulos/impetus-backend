@@ -21,6 +21,9 @@ export class Feature {
   @Prop({ type: GeometrySchema, required: true })
   geometry: Geometry;
 
+  @Prop({ type: String, unique: true })
+  id: string;
+
   @Prop({ type: Object, default: {} })
   properties: Record<string, any>;
 }

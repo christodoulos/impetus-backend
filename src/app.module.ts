@@ -19,7 +19,7 @@ import { AuthGuard } from './auth/auth.guard';
   imports: [
     ThrottlerModule.forRoot({
       ttl: 60,
-      limit: 10,
+      limit: 120,
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client'),

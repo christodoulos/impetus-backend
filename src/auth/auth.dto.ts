@@ -15,3 +15,14 @@ export class AuthDTO {
   })
   readonly password: string;
 }
+
+export class UserDTO {
+  idToken: string;
+  id: string;
+  name: string;
+  email: string;
+  photoUrl: string;
+  firstName: string;
+  lastName: string;
+  provider: string;
+}

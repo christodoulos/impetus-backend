@@ -25,7 +25,7 @@ export enum GeometryType {
 export class IsCoordinates implements ValidatorConstraintInterface {
   validate(coordinates: any[], args: ValidationArguments): boolean {
     const type: GeometryType = (args.object as Geometry).type;
-    console.log(type);
+    // console.log(type);
 
     switch (type) {
       case GeometryType.Point:
