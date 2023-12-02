@@ -15,7 +15,6 @@ function collection2workbook(
   workbookLabel: string,
   workbook: ExcelJS.Workbook,
 ) {
-  console.log(data);
   const worksheet = workbook.addWorksheet(workbookLabel);
   worksheet.columns = headers.map((header) => {
     if (header === 'timestamp') {
