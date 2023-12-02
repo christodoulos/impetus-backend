@@ -6,7 +6,10 @@ import { FarmairController } from './farmair.controller';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: FarmAIr.name, schema: FarmAIrSchema }]),
+    MongooseModule.forFeature(
+      [{ name: FarmAIr.name, schema: FarmAIrSchema }],
+      'impetus-dev',
+    ),
   ],
   providers: [FarmairService],
   controllers: [FarmairController],

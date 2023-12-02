@@ -7,7 +7,10 @@ import { TokenPayload } from 'google-auth-library';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel(User.name, 'impetus-dev')
+    private userModel: Model<UserDocument>,
+  ) {}
 
   async create(
     username: string,
@@ -55,7 +58,7 @@ export class UserService {
     return this.userModel.findOne({ id }).exec();
   }
 
-  async remove(id: string): Promise<void> {
-    await this.userModel.findByIdAndRemove(id);
-  }
+  // async remove(id: string): Promise<void> {
+  //   await this.userModel.findByIdAndRemove(id, );
+  // }
 }

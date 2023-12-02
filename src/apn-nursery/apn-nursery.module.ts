@@ -12,10 +12,14 @@ import { CaslModule } from 'src/casl/casl.module';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: ApnPLC.name, schema: ApnPLCSchema }]),
-    MongooseModule.forFeature([
-      { name: ApnEydap.name, schema: ApnEydapSchema },
-    ]),
+    MongooseModule.forFeature(
+      [{ name: ApnPLC.name, schema: ApnPLCSchema }],
+      'impetus-dev',
+    ),
+    MongooseModule.forFeature(
+      [{ name: ApnEydap.name, schema: ApnEydapSchema }],
+      'impetus-dev',
+    ),
     CaslModule,
   ],
   providers: [ApnNurseryService],

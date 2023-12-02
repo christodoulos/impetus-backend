@@ -61,8 +61,8 @@ export class UserController {
     return this.usersService.findOne(username);
   }
 
-  @Delete(':id')
-  async removeUser(@Param('id') id: string): Promise<void> {
-    return this.usersService.remove(id);
-  }
+  // @Delete(':id')
+  // async removeUser(@Param('id') id: string): Promise<void> {
+  //   return this.usersService.remove(id);
+  // }
 }

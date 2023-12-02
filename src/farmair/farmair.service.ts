@@ -7,7 +7,8 @@ import { FarmAIrDTO } from './farmair.dto';
 @Injectable()
 export class FarmairService {
   constructor(
-    @InjectModel(FarmAIr.name) private farmairModel: Model<FarmAIrDocument>,
+    @InjectModel(FarmAIr.name, 'impetus-dev')
+    private farmairModel: Model<FarmAIrDocument>,
   ) {}
 
   async addScan(scan: FarmAIrDTO): Promise<FarmAIr> {

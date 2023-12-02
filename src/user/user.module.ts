@@ -7,7 +7,10 @@ import { UserController } from './user.controller';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeature(
+      [{ name: User.name, schema: UserSchema }],
+      'impetus-dev',
+    ),
   ],
   providers: [UserService],
   controllers: [UserController],

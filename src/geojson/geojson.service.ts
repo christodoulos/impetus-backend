@@ -12,9 +12,10 @@ import { FeatureDTO, FeatureCollectionDTO } from './geojson.dto';
 @Injectable()
 export class GeojsonService {
   constructor(
-    @InjectModel(FeatureCollection.name)
+    @InjectModel(FeatureCollection.name, 'impetus-dev')
     private featureCollectionModel: Model<FeatureCollectionDocument>,
-    @InjectModel(Feature.name) private featureModel: Model<FeatureDocument>,
+    @InjectModel(Feature.name, 'impetus-dev')
+    private featureModel: Model<FeatureDocument>,
   ) {}
 
   async createFeature(geojson: FeatureDTO): Promise<Feature> {

@@ -12,10 +12,14 @@ import { GeojsonController } from './geojson.controller';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Feature.name, schema: FeatureSchema }]),
-    MongooseModule.forFeature([
-      { name: FeatureCollection.name, schema: FeatureCollectionSchema },
-    ]),
+    MongooseModule.forFeature(
+      [{ name: Feature.name, schema: FeatureSchema }],
+      'impetus-dev',
+    ),
+    MongooseModule.forFeature(
+      [{ name: FeatureCollection.name, schema: FeatureCollectionSchema }],
+      'impetus-dev',
+    ),
   ],
   providers: [GeojsonService],
   controllers: [GeojsonController],

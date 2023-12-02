@@ -14,6 +14,7 @@ import { ApnNurseryModule } from './apn-nursery/apn-nursery.module';
 import { FarmairModule } from './farmair/farmair.module';
 
 import { AuthGuard } from './auth/auth.guard';
+import { AtticaGreenModule } from './attica-green/attica-green.module';
 
 @Module({
   imports: [
@@ -24,13 +25,19 @@ import { AuthGuard } from './auth/auth.guard';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client'),
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/impetus-dev'),
+    MongooseModule.forRoot('mongodb://localhost:27017/impetus-dev', {
+      connectionName: 'impetus-dev',
+    }),
+    MongooseModule.forRoot('mongodb://localhost:27017/attica_green', {
+      connectionName: 'attica_green',
+    }),
     UserModule,
     AuthModule,
     GeojsonModule,
     ApnNurseryModule,
     FarmairModule,
     CaslModule,
+    AtticaGreenModule,
   ],
   providers: [
     {

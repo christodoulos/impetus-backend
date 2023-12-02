@@ -13,8 +13,10 @@ import { ApnEydapDTO } from './apn-eydap.dto';
 @Injectable()
 export class ApnNurseryService {
   constructor(
-    @InjectModel(ApnPLC.name) private apnPLCModel: Model<ApnPLCDocument>,
-    @InjectModel(ApnEydap.name) private apnEydapModel: Model<ApnEydapDocument>,
+    @InjectModel(ApnPLC.name, 'impetus-dev')
+    private apnPLCModel: Model<ApnPLCDocument>,
+    @InjectModel(ApnEydap.name, 'impetus-dev')
+    private apnEydapModel: Model<ApnEydapDocument>,
   ) {}
 
   //////////////////////////////////////////////
