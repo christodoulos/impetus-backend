@@ -44,8 +44,8 @@ export class AtticaGreenService {
 
   // prettier-ignore
   async irrigationToExcel(): Promise<ExcelJS.Buffer> {
-    const irrigation = await this.irrigationModel .find() .select({ _id: 0, __v: 0 }) .lean();
-    const irrigationData = await this.irrigationDataModel .find() .select({ _id: 0, __v: 0 }) .lean();
+    const irrigation = await this.irrigationModel.find().select({ _id: 0, __v: 0 }).lean();
+    const irrigationData = await this.irrigationDataModel.find().select({ _id: 0, __v: 0 }).lean();
     const workbook = new ExcelJS.Workbook();
     let headers = [ 'index', 'timestamp', 'start', 'end', 'conductivity_target', 'ph_target', 'conductivity', 'ph', 'disposal_time', 'valve1_time', 'valve2_time', 'valve3_time', 'valve4_time', 'valve5_time', 'valve6_time', 'valve7_time', 'valve8_time', 'valve9_time', 'valve10_time', 'valve_fertilizer_a', 'valve_fertilizer_b', 'valve_fertilizer_c', 'valve_fertilizer_d', 'valve_fertilizer_e', 'valve_fertilizer_f', 'valve_fertilizer_g', 'valve_fertilizer_h', 'valve_fertilizer_i', 'valve_fertilizer_j', 'valve_fertilizer_acid', 'empty', ];
     collection2workbook(irrigation, headers, 'Irrigation', workbook);

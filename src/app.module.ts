@@ -15,6 +15,7 @@ import { FarmairModule } from './farmair/farmair.module';
 
 import { AuthGuard } from './auth/auth.guard';
 import { AtticaGreenModule } from './attica-green/attica-green.module';
+import { AtticadtModule } from './atticadt/atticadt.module';
 
 @Module({
   imports: [
@@ -31,6 +32,9 @@ import { AtticaGreenModule } from './attica-green/attica-green.module';
     MongooseModule.forRoot('mongodb://localhost:27017/attica_green', {
       connectionName: 'attica_green',
     }),
+    MongooseModule.forRoot('mongodb://localhost:27017/attica_dt', {
+      connectionName: 'attica_dt',
+    }),
     UserModule,
     AuthModule,
     GeojsonModule,
@@ -38,6 +42,7 @@ import { AtticaGreenModule } from './attica-green/attica-green.module';
     FarmairModule,
     CaslModule,
     AtticaGreenModule,
+    AtticadtModule,
   ],
   providers: [
     {
