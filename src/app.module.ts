@@ -35,6 +35,7 @@ import { AtticadtModule } from './atticadt/atticadt.module';
     MongooseModule.forRoot('mongodb://localhost:27017/attica_dt', {
       connectionName: 'attica_dt',
     }),
+
     UserModule,
     AuthModule,
     GeojsonModule,
