@@ -23,25 +23,25 @@ async function bootstrap() {
   app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-  // app.enableCors({
-  //   origin: ['http://localhost:4200', 'https://atticadt.uwmh.eu'],
-  //   preflightContinue: true,
-  //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Include the required methods
-  //   allowedHeaders: ['Content-Type', 'Authorization'], // Add any additional headers needed for your requests
-  // });
-  app.enableCors();
+  app.enableCors({
+    origin: ['http://localhost:4200', 'https://atticadt.uwmh.eu'],
+    preflightContinue: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Include the required methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Add any additional headers needed for your requests
+  });
+  // app.enableCors();
 
   // Apply the ValidationPipe globally
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
   // swaggerConfig
   const config = new DocumentBuilder()
-    .setTitle('Digital Twins of Athens API')
+    .setTitle('Digital Twins of Attica API')
     .setDescription(
-      'The <a href="/api">API</a> provides data to <a href="https://atticadt.uwmh.eu">DT frontend</a> and any interested consumer',
+      'The <a href="/api">API</a> provides data to the <a href="https://atticadt.uwmh.eu">DT frontend</a> and any interested consumer',
     )
     .setVersion('1.0')
-    // .addTag('Digital Twins')
+    .addTag('AtticaDT Management', 'Manage AtticaDT application level data')
     .addBearerAuth(
       {
         type: 'http',
