@@ -32,6 +32,9 @@ export class HipsService {
         $group: {
           _id: '$nuts_id',
           mean: { $avg: '$mean' },
+          min: { $min: '$min' },
+          max: { $max: '$max' },
+          median: { $avg: '$median' },
         },
       },
     ]);
