@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 
 @Schema()
 export class Copernicus {
-  @Prop({ type: Date, required: true }) date: Date;
+  @Prop({ type: Date, required: true, index: true }) date: Date;
   @Prop({ type: String, required: true }) nuts_id: string;
   @Prop({ type: Number, required: true }) mean: number;
   @Prop({ type: Number, required: true }) median: number;
