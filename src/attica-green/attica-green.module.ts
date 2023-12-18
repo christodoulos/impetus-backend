@@ -8,6 +8,8 @@ import {
   IrrigationData,
   IrrigationDataSchema,
   IrrigationSchema,
+  ClimaData,
+  ClimaDataSchema,
 } from './attica-green.schema';
 
 @Module({
@@ -18,6 +20,10 @@ import {
     ),
     MongooseModule.forFeature(
       [{ name: IrrigationData.name, schema: IrrigationDataSchema }],
+      'attica_green',
+    ),
+    MongooseModule.forFeature(
+      [{ name: ClimaData.name, schema: ClimaDataSchema }],
       'attica_green',
     ),
   ],

@@ -62,3 +62,26 @@ export class IrrigationData {
 export type IrrigationDataDocument = HydratedDocument<IrrigationData>;
 export const IrrigationDataSchema =
   SchemaFactory.createForClass(IrrigationData);
+
+@Schema({ collection: 'clima_data' })
+export class ClimaData {
+  @Prop({ type: Date, required: true }) timestamp: Date;
+  @Prop({ type: Number, required: true }) temperature_out: number;
+  @Prop({ type: Number, required: true }) humidity_out: number;
+  @Prop({ type: Number, required: true }) sunshine: number;
+  @Prop({ type: Number, required: true }) temperature_1: number;
+  @Prop({ type: Number, required: true }) temperature_2: number;
+  @Prop({ type: Number, required: true }) humidity_1: number;
+  @Prop({ type: Number, required: true }) humidity_2: number;
+  @Prop({ type: Number, required: true }) is_raining: number;
+  @Prop({ type: Number, required: true }) windows_1: number;
+  @Prop({ type: Number, required: true }) windows_2: number;
+  @Prop({ type: Number, required: true }) empty_1: number;
+  @Prop({ type: Number, required: true }) empty_2: number;
+  @Prop({ type: Number, required: true }) empty_3: number;
+  @Prop({ type: Number, required: true }) empty_4: number;
+  @Prop({ type: Number, required: true }) empty_5: number;
+}
+
+export type ClimaDataDocument = HydratedDocument<ClimaData>;
+export const ClimaDataSchema = SchemaFactory.createForClass(ClimaData);
